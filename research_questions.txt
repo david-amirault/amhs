@@ -1,0 +1,7 @@
+1. When an AHMS model performs poorly, how do we go about diagnosing the cause of the poor performance? Why does the model not generalize? Did we generate enough training data? If classification task, are the classes sufficiently separable? If neural network model, is the network large enough?
+2. What should the outputs of our AMHS model be? Edge weights to control traffic flow? If so, how?
+3. Research papers suggesting using the optimal static model as a baseline. How is this computed?
+4. Why are lot sizes getting smaller? More specialized product demands?
+5. How should we evaluate manually selected features or heuristics versus model selected features?
+6. What should our optimization target be? Output of the FAB, or something more granular e.g. minimizing wait time at specific bottleneck tools?
+7. Should we prefer end-to-end or separated optimization?

@@ -1,0 +1,13 @@
+DES -- discrete event system
+AMHS -- automated material handling system
+FAB -- semiconductor fabrication plant
+OHT -- overhead hoist transfer/transport
+WIP -- works in progress
+FOUP -- front-opening unified pod
+lot -- contents of a FOUP
+tool/application site -- operates on the lot
+rail system - OHT transportation paths
+bridge -- connects FABs in different buildings
+lifter -- connects FABs on different floors
+
+e.g. OHTs carry FOUPs from one tool to another via the rail system in a FAB
