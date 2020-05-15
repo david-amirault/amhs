@@ -1,0 +1,2 @@
+python3 gen_adj_mx.py --distances_filename data/sensor_graph/distances.csv
+python3 generate_training_data.py --output_dir=data/FAB --traffic_df_filename=data/traffic.h5
