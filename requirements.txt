@@ -1,0 +1,9 @@
+torch>=1.3.1
+matplotlib
+numpy
+scipy
+pandas
+argparse
+durbango
+fastprogress
+pytest
