@@ -6,3 +6,4 @@ preds.csv
 data/
 .DS_Store
 *.pkl
+__pycache__

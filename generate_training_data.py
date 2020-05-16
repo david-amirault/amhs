@@ -67,9 +67,15 @@ def generate_train_val_test(args):
     # xs: (subdatasets, num_samples, input_length, num_nodes, input_dim)
     # ys: (subdatasets, num_samples, output_length, num_nodes, output_dim)
     xs, ys = [], []
+    types = {
+        's' : str,
+        't' : str,
+        'w' : np.float64
+    }
     for j in range(1, args.subdatasets + 1):
         df = pd.read_hdf(args.traffic_df_filename, key='data{}'.format(j))
-        edf = pd.read_csv(args.edge_weights_filename.format(j), index_col=0)
+        edf = pd.read_csv(args.edge_weights_filename.format(j), index_col=0,
+                          dtype=types).fillna('')
         # x: (num_samples, input_length, num_nodes, input_dim)
         # y: (num_samples, output_length, num_nodes, output_dim)
         x, y = generate_graph_seq2seq_io_data(
