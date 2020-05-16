@@ -8,7 +8,7 @@ import os
 from durbango import pickle_save
 from fastprogress import progress_bar
 
-from model import GWNet
+from model_gwn import GWNet
 from util import calc_tstep_metrics
 from exp_results import summary
 
