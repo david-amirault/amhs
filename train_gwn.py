@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import time
 import util
-from engine import Trainer
+from engine_gwn import Trainer
 import os
 from durbango import pickle_save
 from fastprogress import progress_bar
