@@ -10,7 +10,8 @@ import pandas as pd
 
 
 def generate_graph_seq2seq_io_data(
-        df, edf, x_offsets, y_offsets, add_time_in_day=True, add_day_in_week=False, scaler=None
+        df, edf, stride, x_offsets, y_offsets,
+        add_time_in_day=True, add_day_in_week=False, scaler=None
 ):
     """
     Generate samples from
@@ -50,7 +51,7 @@ def generate_graph_seq2seq_io_data(
     x, y = [], []
     min_t = abs(min(x_offsets))
     max_t = abs(num_samples - abs(max(y_offsets)))  # Exclusive
-    for t in range(min_t, max_t):  # t is the index of the last observation.
+    for t in range(min_t, max_t, stride):  # t is the index of the last observation.
         x.append(data[t + x_offsets, ...])
         y.append(data[t + y_offsets, ...])
     # x = np.stack(x, axis=0)
@@ -81,6 +82,7 @@ def generate_train_val_test(args):
         x, y = generate_graph_seq2seq_io_data(
             df,
             edf,
+            args.stride,
             x_offsets=x_offsets,
             y_offsets=y_offsets,
             add_time_in_day=False,
@@ -127,6 +129,7 @@ if __name__ == "__main__":
     parser.add_argument("--y_start", type=int, default=1, help="Y pred start", )
     parser.add_argument("--dow", action='store_true',)
     parser.add_argument("--edge_weights_filename", type=str, default="data/generated/graph{}.csv", help="Edge weights csv file.",)
+    parser.add_argument("--stride", type=int, default=1, help="Window stride for creating the dataset.")
     parser.add_argument("--subdatasets", type=int, default=100, help="Number of data keys in the traffic h5 file.",)
 
     args = parser.parse_args()
