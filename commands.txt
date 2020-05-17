@@ -1,3 +1,0 @@
-python3 gen_adj_mx.py --distances_filename data/sensor_graph/distances.csv --output_pkl_filename data/sensor_graph/adj_mx.pkl
-python3 generate_training_data.py --output_dir data/FAB --traffic_df_filename data/traffic.h5
-python3 train.py --device cpu --data data/FAB --num_nodes 168 --cat_feat_gc --do_graph_conv --addaptadj --randomadj --save logs/baseline_v2

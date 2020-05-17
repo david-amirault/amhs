@@ -3,12 +3,12 @@ import numpy as np
 import pandas as pd
 import time
 import util
-from engine_gwn import Trainer
+from engine import Trainer
 import os
 from durbango import pickle_save
 from fastprogress import progress_bar
 
-from model_gwn import GWNet
+from model import GWNet
 from util import calc_tstep_metrics
 from exp_results import summary
 
