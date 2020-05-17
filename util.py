@@ -258,6 +258,7 @@ def get_shared_arg_parser():
     parser.add_argument('--fill_zeroes', action='store_true')
     parser.add_argument('--checkpoint', type=str, help='')
     parser.add_argument('--scale_dim', type=int, default=168, help='New number of nodes to for the input and output layers.')
-    parser.add_argument('--downscale_input', action='store_true')
-    parser.add_argument('--upscale_output', action='store_true')
+    parser.add_argument('--downscale_input', action='store_true', help='Whether to downscale the input from scale_dim to num_nodes.')
+    parser.add_argument('--upscale_output', action='store_true', help='Whether to upscale the output from num_nodes to scale_dim.')
+    parser.add_argument('--pwn', action='store_true', help='Whether to use the Partition WaveNet node embedding dictionary.')
     return parser
