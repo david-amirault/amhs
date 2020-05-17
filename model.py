@@ -222,7 +222,7 @@ class GWNet(nn.Module):
         x = self.end_conv_2(x)  # downsample to (bs, seq_length, num_nodes, nfeatures)
         if self.upscale_output:
             x = x.transpose(3, 2).contiguous()
-            x = self.end_linear(x)
+            x = F.relu(self.end_linear(x))
             x = x.transpose(3, 2).contiguous()
         return x
 
