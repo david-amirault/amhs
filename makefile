@@ -19,11 +19,18 @@ toy_part_data:
 fab_gwn_train:
 	python3 train.py --data data/fab_full --adjdata data/sensor_graph/full_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 168 --cat_feat_gc --save logs/fab_gwn
 
+fab_embedding_train:
+	python3 train.py --data data/fab_full --adjdata data/sensor_graph/full_adj_mx.pkl --do_graph_conv --aptonly --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --scale_dim 168 --downscale_input --upscale_output --save logs/fab_embedding
+
 fab_partition_train:
 	python3 train.py --data data/fab_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --save logs/fab_partition
 
 toy_gwn_train:
 	python3 train.py --device cpu --data data/toy_full --adjdata data/sensor_graph/full_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 168 --cat_feat_gc --save logs/toy_gwn
 
+toy_embedding_train:
+	python3 train.py --device cpu --data data/toy_full --adjdata data/sensor_graph/full_adj_mx.pkl --do_graph_conv --aptonly --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --scale_dim 168 --downscale_input --upscale_output --save logs/toy_embedding
+
 toy_partition_train:
 	python3 train.py --device cpu --data data/toy_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --save logs/toy_partition
+

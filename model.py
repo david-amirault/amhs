@@ -37,7 +37,7 @@ class GWNet(nn.Module):
                  addaptadj=True, aptinit=None, in_dim=2, out_dim=12,
                  residual_channels=32, dilation_channels=32, cat_feat_gc=False,
                  skip_channels=256, end_channels=512, kernel_size=2, blocks=4, layers=2,
-                 apt_size=10):
+                 apt_size=10, scale_dim=168, downscale_input=False, upscale_output=False):
         super().__init__()
         self.dropout = dropout
         self.blocks = blocks
@@ -45,7 +45,19 @@ class GWNet(nn.Module):
         self.do_graph_conv = do_graph_conv
         self.cat_feat_gc = cat_feat_gc
         self.addaptadj = addaptadj
+        self.scale_dim = scale_dim
+        self.downscale_input = downscale_input
+        self.upscale_output = upscale_output
 
+        if self.downscale_input:
+            self.start_linear = nn.Linear(in_features=self.scale_dim,
+                                          out_features=num_nodes,
+                                          bias=True)
+
+        if self.upscale_output:
+            self.end_linear = nn.Linear(in_features=num_nodes,
+                                        out_features=self.scale_dim,
+                                        bias=True)
 
         if self.cat_feat_gc:
             self.start_conv = nn.Conv2d(in_channels=1,  # hard code to avoid errors
@@ -111,7 +123,8 @@ class GWNet(nn.Module):
                         in_dim=args.in_dim, apt_size=args.apt_size, out_dim=args.seq_length,
                         residual_channels=args.nhid, dilation_channels=args.nhid,
                         skip_channels=args.nhid * 8, end_channels=args.nhid * 16,
-                        cat_feat_gc=args.cat_feat_gc)
+                        cat_feat_gc=args.cat_feat_gc, scale_dim=args.scale_dim,
+                        downscale_input=args.downscale_input, upscale_output=args.upscale_output)
         defaults.update(**kwargs)
         model = cls(device, args.num_nodes, **defaults)
         return model
@@ -127,6 +140,10 @@ class GWNet(nn.Module):
         self.load_state_dict(cur_state_dict)
 
     def forward(self, x):
+        if self.downscale_input:
+            x = x.permute(0, 1, 3, 2).contiguous()
+            x = self.start_linear(x)
+            x = x.permute(0, 1, 3, 2).contiguous()
         # Input shape is (bs, features, n_nodes, n_timesteps)
         in_len = x.size(3)
         if in_len < self.receptive_field:
@@ -182,7 +199,11 @@ class GWNet(nn.Module):
 
         x = F.relu(skip)  # ignore last X?
         x = F.relu(self.end_conv_1(x))
-        x = self.end_conv_2(x)  # downsample to (bs, seq_length, 207, nfeatures)
+        x = self.end_conv_2(x)  # downsample to (bs, seq_length, num_nodes, nfeatures)
+        if self.upscale_output:
+            x = x.permute(0, 1, 3, 2).contiguous()
+            x = self.end_linear(x)
+            x = x.permute(0, 1, 3, 2).contiguous()
         return x
 
 

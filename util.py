@@ -257,4 +257,7 @@ def get_shared_arg_parser():
     parser.add_argument('--cat_feat_gc', action='store_true')
     parser.add_argument('--fill_zeroes', action='store_true')
     parser.add_argument('--checkpoint', type=str, help='')
+    parser.add_argument('--scale_dim', type=int, default=168, help='New number of nodes to for the input and output layers.')
+    parser.add_argument('--downscale_input', action='store_true')
+    parser.add_argument('--upscale_output', action='store_true')
     return parser
