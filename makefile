@@ -28,6 +28,9 @@ fab_embedding_train:
 fab_partition_train:
 	python3 train.py --data data/fab_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --save logs/fab_partition
 
+fab_partition_regression:
+	python3 regression.py --data data/fab_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --checkpoint logs/fab_partition/best_model.pth --label_path data/fab_full
+
 toy_pwn_train:
 	python3 train.py --device cpu --data data/toy_full --adjdata data/sensor_graph/full_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 168 --cat_feat_gc --scale_dim 20 --upscale_output --pwn --save logs/toy_pwn
 
@@ -39,4 +42,7 @@ toy_embedding_train:
 
 toy_partition_train:
 	python3 train.py --device cpu --data data/toy_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --save logs/toy_partition
+
+toy_partition_regression:
+	python3 regression.py --device cpu --data data/toy_part --adjdata data/sensor_graph/part_adj_mx.pkl --do_graph_conv --addaptadj --randomadj --num_nodes 20 --cat_feat_gc --checkpoint logs/toy_partition/best_model.pth --label_path data/toy_full
 
