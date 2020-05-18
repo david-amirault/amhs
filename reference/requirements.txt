@@ -7,3 +7,9 @@ argparse
 durbango
 fastprogress
 pytest
+funcy
+tqdm
+ipykernel
+sklearn
+py3nvml
+psutil
