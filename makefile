@@ -5,10 +5,10 @@ part_adj_mx:
 	python3 gen_adj_mx.py --sensor_ids_filename data/sensor_graph/part_ids.txt --distances_filename data/sensor_graph/part_distances.csv --output_pkl_filename data/sensor_graph/part_adj_mx.pkl
 
 fab_full_data:
-	python3 generate_training_data.py --output_dir data/fab_full --traffic_df_filename data/fab_full.h5 --edge_weights_filename data/fab/full_graph{}.csv --stride 2
+	python3 generate_training_data.py --output_dir data/fab_full --traffic_df_filename data/fab_full.h5 --edge_weights_filename data/fab/full_graph{}.csv --stride 6
 
 fab_part_data:
-	python3 generate_training_data.py --output_dir data/fab_part --traffic_df_filename data/fab_part.h5 --edge_weights_filename data/fab/part_graph{}.csv --stride 2
+	python3 generate_training_data.py --output_dir data/fab_part --traffic_df_filename data/fab_part.h5 --edge_weights_filename data/fab/part_graph{}.csv --stride 6
 
 toy_full_data:
 	python3 generate_training_data.py --output_dir data/toy_full --traffic_df_filename data/toy_full.h5 --edge_weights_filename data/toy/full_graph{}.csv --subdatasets 4 --stride 2
