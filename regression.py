@@ -36,8 +36,8 @@ def main(args, **model_kwargs):
     print('training regression models')
     models = []
     for t in range(args.seq_length):
-        ty = y[:,:,t].numpy()
-        tyh = yhat[:,:,t].numpy()
+        ty = y[:,:,t].cpu().numpy()
+        tyh = yhat[:,:,t].cpu().numpy()
         ms = []
         for n in range(ty.shape[1]):
             p = partition(ids[n])
@@ -55,8 +55,8 @@ def main(args, **model_kwargs):
             y = y.transpose(1,3)[:,0,:,:]
         losses = []
         for t in range(args.seq_length):
-            ty = y[:,:,t].numpy()
-            tyh = yhat[:,:,t].numpy()
+            ty = y[:,:,t].cpu().numpy()
+            tyh = yhat[:,:,t].cpu().numpy()
             maes = []
             for n in range(ty.shape[1]):
                 p = partition(ids[n])
