@@ -13,3 +13,4 @@ ipykernel
 sklearn
 py3nvml
 psutil
+tables
